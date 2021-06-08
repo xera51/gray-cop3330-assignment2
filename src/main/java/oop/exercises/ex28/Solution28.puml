@@ -1,0 +1,11 @@
+@startuml
+:i = 0;
+:total = 0;
+while (i < 5)
+    :prompt for user input;
+    :add user input to total;
+    :add one to i;
+endwhile
+:display total;
+stop
+@enduml
