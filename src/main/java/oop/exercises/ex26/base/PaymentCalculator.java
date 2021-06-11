@@ -4,41 +4,29 @@
  */
 package oop.exercises.ex26.base;
 
-import java.math.BigDecimal;
-import static java.math.BigDecimal.ONE;
-import static java.math.RoundingMode.HALF_EVEN;
-import static java.math.RoundingMode.CEILING;
-import static oop.exercises.ex26.base.BigDecimalCalculations.log10;
-
 public class PaymentCalculator {
 
-    private static final BigDecimal NEGATIVE_ONE_OVER_THIRTY =
-            ONE.divide(BigDecimal.valueOf(30), 30, HALF_EVEN).negate();
-    private static final int precision = 30;
-
-    public int calculateMonthsUntilPayedOff(BigDecimal balance, BigDecimal APR, BigDecimal payment) {
+    public int calculateMonthsUntilPayedOff(double balance, double APR, double payment) {
         balance = roundUpToNearestCent(balance);
         payment = roundUpToNearestCent(payment);
-        APR = APR.divide(BigDecimal.valueOf(100), precision, HALF_EVEN);
+        APR = APR / 100;
 
-        BigDecimal i = APR.divide(BigDecimal.valueOf(365), precision, HALF_EVEN);
-        BigDecimal bOverP = balance.divide(payment, precision, HALF_EVEN);
+        double i = APR / 365;
+        double bOverP = balance / payment;
 
-        BigDecimal numerator;
-        try {
-            numerator = log10(ONE.add(
-                    bOverP.multiply(ONE.subtract(ONE.add(i).pow(30)))), precision);
-        } catch (ArithmeticException e) {
-            throw new ArithmeticException("Can never be payed off");
+        double inLog = 1 + (bOverP * (1 - Math.pow(1 + i, 30)));
+        if(inLog < 0) {
+            throw new ArithmeticException("The card can never be payed off");
         }
-        BigDecimal denominator = log10(ONE.add(i), precision);
 
-        return NEGATIVE_ONE_OVER_THIRTY.multiply(numerator.divide(
-                denominator, precision, HALF_EVEN)).setScale(0, CEILING).intValue();
+        double numerator = Math.log(inLog);
+        double denominator = Math.log(1 + i);
+
+        return (int) Math.ceil((-1 / 30.0) * (numerator / denominator));
     }
 
-    private BigDecimal roundUpToNearestCent(BigDecimal currency) {
-        return currency.setScale(2, CEILING);
+    private double roundUpToNearestCent(double currency) {
+        return (Math.ceil(currency * 100)) / 100.0;
     }
 
 }

@@ -4,7 +4,6 @@
  */
 package oop.exercises.ex26.base;
 
-import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class Solution26 {
@@ -14,12 +13,12 @@ public class Solution26 {
     public static void main(String[] args) {
         PaymentCalculator calculator = new PaymentCalculator();
 
-        BigDecimal balance =
-                readBigDecimal("What is your balance? ");
-        BigDecimal APR =
-                readBigDecimal("What is the APR on the card (as a percent)? ");
-        BigDecimal monthlyPayment =
-                readBigDecimal("What is the monthly payment you can make? ");
+        double balance =
+                readDouble("What is your balance? ");
+        double APR =
+                readDouble("What is the APR on the card (as a percent)? ");
+        double monthlyPayment =
+                readDouble("What is the monthly payment you can make? ");
         try {
             int numMonthsUntilPayed = calculator.calculateMonthsUntilPayedOff(balance, APR, monthlyPayment);
             System.out.printf("It will take you %d months to pay off this card.%n", numMonthsUntilPayed);
@@ -29,9 +28,9 @@ public class Solution26 {
     }
 
 
-    private static BigDecimal readBigDecimal(String prompt) {
+    private static double readDouble(String prompt) {
         System.out.print(prompt);
-        return BigDecimal.valueOf(in.nextDouble());
+        return in.nextDouble();
     }
 }
 
