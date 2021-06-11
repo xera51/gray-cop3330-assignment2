@@ -1,0 +1,48 @@
+package oop.exercises.ex39.base;
+
+import java.util.ArrayList;
+
+public class EmployeeList {
+
+    private final ArrayList<Employee> list = new ArrayList<>();
+
+    public void addEmployee(Employee newEmployee) {
+        list.add(newEmployee);
+    }
+
+    public void displayEmployeesByLastName(){
+        sortByLastName();
+        displayEmployees();
+
+    }
+
+    public void displayEmployees() {
+        System.out.printf("%-20s| %-18s|%16s%n", "Name", "Position", "Separation Date");
+        System.out.println("--------------------|-------------------|----------------");
+        for (Employee employee : list) {
+            System.out.printf("%-20s| %-18s| %-15s%n", employee.getFullName(),
+                    employee.getPosition(), employee.getSeparationDate());
+        }
+    }
+
+    public void sortByLastName() {
+
+        for(int i = 0; i < list.size() - 1; i++) {
+            int swapIndex = i;
+            Employee current = list.get(i);
+            for(int j = i + 1; j < list.size(); j++) {
+                if(list.get(j).getLastName().compareTo(current.getLastName()) < 0) {
+                    current = list.get(j);
+                    swapIndex = j;
+                }
+            }
+            swap(i, swapIndex);
+        }
+    }
+
+    private void swap(int index1, int index2) {
+        Employee temp = list.get(index1);
+        list.set(index1, list.get(index2));
+        list.set(index2, temp);
+    }
+}
