@@ -21,12 +21,20 @@ public class EmployeeList {
     }
 
     public void displayEmployees() {
+        displayTableHeader();
+        for (Employee employee : list) {
+            displayTableEntry(employee);
+        }
+    }
+
+    private void displayTableHeader() {
         System.out.printf("%-20s| %-18s|%16s%n", "Name", "Position", "Separation Date");
         System.out.println("--------------------|-------------------|----------------");
-        for (Employee employee : list) {
-            System.out.printf("%-20s| %-18s| %-15s%n", employee.getFullName(),
-                    employee.getPosition(), employee.getSeparationDate());
-        }
+    }
+
+    private void displayTableEntry(Employee employee) {
+        System.out.printf("%-20s| %-18s| %-15s%n", employee.getFullName(),
+                employee.getPosition(), employee.getSeparationDate());
     }
 
     public void sortByLastName() {
@@ -48,5 +56,14 @@ public class EmployeeList {
         Employee temp = list.get(index1);
         list.set(index1, list.get(index2));
         list.set(index2, temp);
+    }
+
+    public void displayFilteredTable(String nameTerm) {
+        displayTableHeader();
+        for(Employee employee : list) {
+            if(employee.getFirstName().contains(nameTerm) || employee.getLastName().contains(nameTerm)) {
+                displayTableEntry(employee);
+            }
+        }
     }
 }

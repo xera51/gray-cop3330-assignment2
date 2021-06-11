@@ -13,7 +13,7 @@ public class Solution39 {
         list.displayEmployeesByLastName();
     }
 
-    private static void employeeEntries(EmployeeList list) {
+    public static void employeeEntries(EmployeeList list) {
         list.addEmployee(new Employee("John", "Johnson", "Manager", "2016-12-31"));
         list.addEmployee(new Employee("Tou", "Xiong", "Software Engineer", "2016-10-05"));
         list.addEmployee(new Employee("Michaela",	"Michaelson", "District Manager", "2015-12-19"));
