@@ -1,3 +1,7 @@
+/*
+ *  UCF COP3330 Summer 2021 Assignment 2 Solution
+ *  Copyright 2021 Christopher Gray
+ */
 package oop.exercises.utility;
 
 import java.util.Scanner;
@@ -9,7 +13,7 @@ public class DataReader {
     public DataReader() { }
 
     /**
-     * Prompts the user for an input, and returns the input the line they typed
+     * Prompts the user for an input, and returns the line they typed
      * into the console as a {@code String}
      * @param prompt {@code String} to be displayed as a prompt for the user
      * @return {@code String} value that the user typed to the console
@@ -20,7 +24,7 @@ public class DataReader {
     }
 
     /**
-     * Prompts the user for an input, and returns the input the line they typed
+     * Prompts the user for an input, and returns the line they typed
      * into the console as a {@code int}
      * @param prompt {@code String} to be displayed as a prompt for the user
      * @return {@code int} value that the user typed to the console
@@ -31,7 +35,7 @@ public class DataReader {
     }
 
     /**
-     * Prompts the user for an input, and returns the input the line they typed
+     * Prompts the user for an input, and returns the line they typed
      * into the console as a {@code int}
      * <p> If the user does not enter an {@code int}, the errorMessage is
      * printed to the console, and the user is prompted for input again.
@@ -53,14 +57,25 @@ public class DataReader {
                 output = Integer.parseInt(input);
                 continueLoop = false;
             } catch (NumberFormatException e) {
-                System.out.println(errorMessage);
+                if(!errorMessage.isEmpty()) {
+                    System.out.println(errorMessage);
+                }
             }
         }
         return output;
     }
 
     /**
-     * Prompts the user for an input, and returns the input the line they typed
+     * {@code errorMessage} defaults to the empty {@code String}
+     *
+     * @see #readIntValidated(String, String) 
+     */
+    public int readIntValidated(String prompt) {
+        return readIntValidated(prompt, "");
+    }
+
+    /**
+     * Prompts the user for an input, and returns the line they typed
      * into the console as a {@code double}
      * @param prompt {@code String} to be displayed as a prompt for the user
      * @return {@code double} value that the user typed to the console
@@ -71,7 +86,7 @@ public class DataReader {
     }
 
     /**
-     * Prompts the user for an input, and returns the input the line they typed
+     * Prompts the user for an input, and returns the line they typed
      * into the console as a {@code double}
      * <p> If the user does not enter an {@code double}, the errorMessage is
      * printed to the console, and the user is prompted for input again.
@@ -93,10 +108,68 @@ public class DataReader {
                 output = Double.parseDouble(input);
                 continueLoop = false;
             } catch (NumberFormatException e) {
-                System.out.println(errorMessage);
+                if(!errorMessage.isEmpty()) {
+                    System.out.println(errorMessage);
+                }
             }
         }
         return output;
+    }
+
+    /**
+     * {@code errorMessage} defaults to the empty {@code String}
+     *
+     * @see #readDoubleValidated(String, String)
+     */
+    public double readDoubleValidated(String prompt) {
+        return readDoubleValidated(prompt, "");
+    }
+
+    /**
+     * Prompts the user for an input n times, and returns the inputs they typed
+     * into the console as a {@code Array} of {@code double}s
+     *
+     * @param prompt {@code String} to be displayed as a prompt for the user
+     * @param n Number of {@code double}s the user must input
+     * @return An array of doubles
+     * @see #readDouble(String)
+     */
+    public double[] readNDoubles(String prompt, int n) {
+        double[] output = new double[n];
+        for(int i = 0; i < n; i++) {
+            output[i] = readDouble(prompt);
+        }
+        return output;
+    }
+
+    /**
+     * Prompts the user for an input n times, and returns the inputs they typed
+     * into the console as a {@code Array} of {@code double}s
+     * <p> If the user does not enter an {@code double}, the errorMessage is
+     * printed to the console, and the user is prompted for input again.
+     * The user will be continuously shown the errorMessage and prompt until
+     * they enter a valid value
+     *
+     * @param prompt {@code String} to be displayed as a prompt for the user
+     * @param n Number of {@code double}s the user must input
+     * @return An array of doubles
+     * @see #readDoubleValidated(String, String)
+     */
+    public double[] readNDoublesValidated(String prompt, String errorMessage, int n) {
+        double[] output = new double[n];
+        for(int i = 0; i < n; i++) {
+            output[i] = readDoubleValidated(prompt, errorMessage);
+        }
+        return output;
+    }
+
+    /**
+     * {@code errorMessage} defaults to the empty {@code String}
+     *
+     * @see #readNDoublesValidated(String, String, int)
+     */
+    public double[] readNDoublesValidated(String prompt, int n) {
+        return readNDoublesValidated(prompt, "", n);
     }
 
 }
