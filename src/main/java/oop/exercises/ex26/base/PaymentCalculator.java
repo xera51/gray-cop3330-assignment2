@@ -6,6 +6,15 @@ package oop.exercises.ex26.base;
 
 public class PaymentCalculator {
 
+    /**
+     * Calculates the amount of months it will take to pay off a credit card
+     *
+     * @param balance the balance of the card
+     * @param APR the APR of the card, as a percent
+     * @param payment the amount payed to the card per month
+     * @return the number of months it will take to pay off a credit card
+     * @throws ArithmeticException if the card can never be payed off
+     */
     public int calculateMonthsUntilPayedOff(double balance, double APR, double payment) {
         balance = roundUpToNearestCent(balance);
         payment = roundUpToNearestCent(payment);
