@@ -8,29 +8,41 @@ import java.util.Arrays;
 
 public class AnagramDetector {
 
-    public boolean isAnagram(String input1, String input2) {
+    /**
+     * Compares two {@code String}s to see if they are anagrams
+     * <p>An {@code IllegalArgumentException} is thrown if the arguments are
+     * different lengths, disregarding whitespace
+     * @param arg1 {@code String} to compare
+     * @param arg2 {@code String} to compare
+     * @return {@code true} if and only if the two strings are anagrams
+     */
+    public boolean isAnagram(String arg1, String arg2) {
 
-        if(!isSameLengthNoWhitespace(input1, input2)) {
-            throw new MismatchedLengthException("Strings are different lengths");
+        if(!sameLengthNoWhitespace(arg1, arg2)) {
+            throw new IllegalArgumentException("Strings are different lengths");
         }
 
-        char[] inputAsChars1 = anagramCompareFormat(input1);
-        char[] inputAsChars2 = anagramCompareFormat(input2);
+        char[] arg1CharArray = anagramCompareFormat(arg1);
+        char[] arg2CharArray = anagramCompareFormat(arg2);
 
-        Arrays.sort(inputAsChars1);
-        Arrays.sort(inputAsChars2);
-
-        return Arrays.equals(inputAsChars1, inputAsChars2);
+        return Arrays.equals(arg1CharArray, arg2CharArray);
     }
 
-    private boolean isSameLengthNoWhitespace(String input1, String input2) {
-        return input1.replaceAll("\\s", "").length() ==
-                input2.replaceAll("\\s", "").length();
+
+    private boolean sameLengthNoWhitespace(String arg1, String arg2) {
+        return removeWhitespace(arg1).length() == removeWhitespace(arg2).length();
     }
 
-    // Removes whitespace, converts all letters to lowercase, and returns string as char array
-    private char[] anagramCompareFormat(String input1) {
-        return input1.replaceAll("\\s", "").toLowerCase().toCharArray();
+
+    private char[] anagramCompareFormat(String str) {
+        char[] out = removeWhitespace(str).toLowerCase().toCharArray();
+        Arrays.sort(out);
+        return out;
+    }
+
+    // Removes the whitespace from a String
+    private String removeWhitespace(String str) {
+        return str.replaceAll("\\s", "");
     }
 
 }
