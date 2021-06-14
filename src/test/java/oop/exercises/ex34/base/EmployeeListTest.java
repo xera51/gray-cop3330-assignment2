@@ -4,6 +4,7 @@
  */
 package oop.exercises.ex34.base;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,11 +12,18 @@ import static org.junit.jupiter.api.Assertions.*;
 class EmployeeListTest {
 
     @Test
-    void remove_employee_successfully_removes_an_employee() {
-        // would make test to see that the length is shorter, but the list is private
+    @DisplayName("List of names formatted correctly")
+    void list_is_formatted_correctly() {
+        EmployeeList list = new EmployeeList();
 
-        // save length
-        // delete
-        // check if length is one less
+        String expected = String.format("There are 5 employees:%n" +
+                "John Smith%n" +
+                "Jackie Jackson%n" +
+                "Chris Jones%n" +
+                "Amanda Cullen%n" +
+                "Jeremy Goodwin%n");
+        String actual = list.buildEmployeeList();
+
+        assertEquals(expected, actual);
     }
 }

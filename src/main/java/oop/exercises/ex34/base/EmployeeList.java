@@ -4,28 +4,30 @@
  */
 package oop.exercises.ex34.base;
 
+import oop.exercises.utility.DataReader;
+
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class EmployeeList {
 
-    private static final Scanner in = new Scanner(System.in);
+    private static final DataReader in = new DataReader();
     private static final ArrayList<String> employeeList = new ArrayList<>(Arrays.asList("John Smith", "Jackie Jackson",
             "Chris Jones", "Amanda Cullen", "Jeremy Goodwin"));
 
-    public void displayEmployeeList() {
-        System.out.printf("There are %d employees:%n", employeeList.size());
+    public String buildEmployeeList() {
+        StringBuilder output = new StringBuilder();
+        output.append(String.format("There are %d employees:%n", employeeList.size()));
         for(String employee : employeeList) {
-            System.out.println(employee);
+            output.append(String.format("%s%n", employee));
         }
-        System.out.println();
+        return output.toString();
     }
 
     public void removeEmployee() {
-        System.out.print("Enter an employee name to remove: ");
-        String remove = in.nextLine();
+        String remove = in.readString("Enter an employee name to remove: ");
         employeeList.remove(remove);
         System.out.println();
     }
+
 }
