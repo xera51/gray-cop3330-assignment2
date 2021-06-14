@@ -5,45 +5,58 @@
 package oop.exercises.ex39.base;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class EmployeeList {
 
-    private final ArrayList<Employee> list = new ArrayList<>();
+    private final ArrayList<HashMap<String, String>> list = new ArrayList<>();
 
-    public void addEmployee(Employee newEmployee) {
+    public void addEmployee(String firstName, String lastName, String position, String separationDate) {
+
+        HashMap<String, String> newEmployee = new HashMap<>();
+        newEmployee.put("firstName", firstName);
+        newEmployee.put("lastName", lastName);
+        newEmployee.put("position", position);
+        newEmployee.put("separationDate", separationDate);
+
         list.add(newEmployee);
     }
 
-    public void displayEmployeesByLastName(){
+    public void addEmployee(String firstName, String lastName, String position) {
+        addEmployee(firstName, lastName, position, "");
+    }
+
+    public String displayEmployeesByLastName(){
         sortByLastName();
-        displayEmployees();
-
+        return displayEmployees();
     }
 
-    public void displayEmployees() {
-        displayTableHeader();
-        for (Employee employee : list) {
-            displayTableEntry(employee);
+    public String displayEmployees() {
+        StringBuilder output = new StringBuilder();
+        output.append(displayTableHeader());
+        for (HashMap<String, String> employee : list) {
+            output.append(displayTableEntry(employee));
         }
+        return output.toString();
     }
 
-    private void displayTableHeader() {
-        System.out.printf("%-20s| %-18s|%16s%n", "Name", "Position", "Separation Date");
-        System.out.println("--------------------|-------------------|----------------");
+    private String displayTableHeader() {
+        return String.format("%-20s| %-18s|%16s%n--------------------|-------------------|----------------%n"
+                , "Name", "Position", "Separation Date");
     }
 
-    private void displayTableEntry(Employee employee) {
-        System.out.printf("%-20s| %-18s| %-15s%n", employee.getFullName(),
-                employee.getPosition(), employee.getSeparationDate());
+    private String displayTableEntry(HashMap<String, String> employee) {
+        return String.format("%-20s| %-18s| %-15s%n", getFullName(employee),
+                employee.get("position"), employee.get("separationDate"));
     }
 
     public void sortByLastName() {
 
         for(int i = 0; i < list.size() - 1; i++) {
             int swapIndex = i;
-            Employee current = list.get(i);
+            HashMap<String, String> current = list.get(i);
             for(int j = i + 1; j < list.size(); j++) {
-                if(list.get(j).getLastName().compareTo(current.getLastName()) < 0) {
+                if(list.get(j).get("lastName").compareTo(current.get("lastName")) < 0) {
                     current = list.get(j);
                     swapIndex = j;
                 }
@@ -53,17 +66,24 @@ public class EmployeeList {
     }
 
     private void swap(int index1, int index2) {
-        Employee temp = list.get(index1);
+        HashMap<String, String> temp = list.get(index1);
         list.set(index1, list.get(index2));
         list.set(index2, temp);
     }
 
-    public void displayFilteredTable(String nameTerm) {
-        displayTableHeader();
-        for(Employee employee : list) {
-            if(employee.getFirstName().contains(nameTerm) || employee.getLastName().contains(nameTerm)) {
-                displayTableEntry(employee);
+    public String displayFilteredTable(String nameTerm) {
+        sortByLastName();
+        StringBuilder output = new StringBuilder();
+        output.append(displayTableHeader());
+        for(HashMap<String, String> employee : list) {
+            if(employee.get("firstName").contains(nameTerm) || employee.get("lastName").contains(nameTerm)) {
+                output.append(displayTableEntry(employee));
             }
         }
+        return output.toString();
+    }
+
+    private String getFullName(HashMap<String, String> employee) {
+        return employee.get("firstName") + " " + employee.get("lastName");
     }
 }
