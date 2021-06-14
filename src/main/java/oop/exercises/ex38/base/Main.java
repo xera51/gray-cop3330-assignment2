@@ -7,7 +7,7 @@ package oop.exercises.ex38.base;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Solution38 {
+public class Main {
 
     private static final Scanner in = new Scanner(System.in);
 
@@ -37,7 +37,7 @@ public class Solution38 {
             }
         }
 
-        // Convert from ArrayList to array of primitive type int;
+        // Convert from ArrayList to array of primitive type int
         int[] evenArray = new int[evenList.size()];
 
         for(int i = 0; i < evenArray.length; i++) {

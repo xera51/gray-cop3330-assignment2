@@ -6,10 +6,10 @@ package oop.exercises.ex38.base;
 
 import org.junit.jupiter.api.Test;
 
-import static oop.exercises.ex38.base.Solution38.filterEvenNumbers;
+import static oop.exercises.ex38.base.Main.filterEvenNumbers;
 import static org.junit.jupiter.api.Assertions.*;
 
-class Solution38Test {
+class MainTest {
 
     @Test
     void odd_numbers_are_filtered_out() {
