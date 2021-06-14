@@ -4,28 +4,32 @@
  */
 package oop.exercises.ex35.base;
 
+import oop.exercises.utility.DataReader;
+
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Scanner;
 
 public class PickAWinner {
 
-    private static final Scanner in = new Scanner(System.in);
+    private final DataReader in = new DataReader();
     private final ArrayList<String> entries = new ArrayList<>();
 
     public void readEntries() {
         while(true) {
-            System.out.print("Enter a name: ");
-            String entrant = in.nextLine();
+            String entrant = in.readString("Enter a name: ");
 
             if(entrant.isEmpty()) break;
             else entries.add(entrant);
         }
     }
 
-    public void pickAWinner() {
+    public void addEntry(String entrant) {
+        entries.add(entrant);
+    }
+
+    public String pickAWinner() {
         Random random = new Random();
         String winner = entries.get(random.nextInt(entries.size()));
-        System.out.printf("The winner is... %s%n", winner);
+        return String.format("The winner is... %s.", winner);
     }
 }
