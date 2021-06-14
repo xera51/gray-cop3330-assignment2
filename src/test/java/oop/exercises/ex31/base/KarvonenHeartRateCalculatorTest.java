@@ -4,6 +4,7 @@
  */
 package oop.exercises.ex31.base;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,45 +12,60 @@ import static org.junit.jupiter.api.Assertions.*;
 class KarvonenHeartRateCalculatorTest {
 
     @Test
-    void heart_rate_returns_proper_result() {
+    @DisplayName("Age: 22 Resting Heart Rate: 65 Intensity: 55%")
+    void heart_rate_returns_proper_result_set1() {
         KarvonenHeartRateCalculator calculator = new KarvonenHeartRateCalculator();
 
         assertEquals(138, calculator.calculateTargetHeartRate(22, 65, 0.55));
     }
 
     @Test
-    void heart_rate_returns_proper_result_2() {
+    @DisplayName("Age: 22 Resting Heart Rate: 65 Intensity: 65%")
+    void heart_rate_returns_proper_result_set2() {
         KarvonenHeartRateCalculator calculator = new KarvonenHeartRateCalculator();
 
         assertEquals(145, calculator.calculateTargetHeartRate(22, 65, 0.60));
     }
 
     @Test
-    void heart_rate_returns_proper_result_3() {
+    @DisplayName("Age: 22 Resting Heart Rate: 65 Intensity: 65%")
+    void heart_rate_returns_proper_result_set3() {
         KarvonenHeartRateCalculator calculator = new KarvonenHeartRateCalculator();
 
         assertEquals(151, calculator.calculateTargetHeartRate(22, 65, 0.65));
     }
 
     @Test
-    void heart_rate_returns_proper_result_4() {
+    @DisplayName("Age: 22 Resting Heart Rate: 65 Intensity: 95%")
+    void heart_rate_returns_proper_result_set4() {
         KarvonenHeartRateCalculator calculator = new KarvonenHeartRateCalculator();
 
         assertEquals(191, calculator.calculateTargetHeartRate(22, 65, 0.95));
     }
 
-    // Cannot get test to work because of inaccuracy of doubles
     @Test
-    void heart_rate_array_gives_proper_results() {
+    @DisplayName("Table is built correctly")
+    void table_is_built_correctly() {
         KarvonenHeartRateCalculator calculator = new KarvonenHeartRateCalculator();
 
-        int[] personData = {22, 65};
+        double[] personData = {22, 65};
         double[] rangeData = {0.55, 0.95, 0.05};
 
-        double[][] expected = {{0.55, 138}, {0.60, 145}, {0.65, 151}, {0.70, 158},
-                {0.75, 165}, {0.80, 171}, {0.85, 178}, {0.90, 185}, {0.95, 191}};
-        double[][] actual = calculator.calculateTargetHeartRateRange(personData, rangeData);
+        String expected = String.format("Resting Pulse: 65        Age: 22%n%n" +
+                "Intensity    | Rate%n" +
+                "-------------|--------%n" +
+                "55%%          | 138 bpm%n" +
+                "60%%          | 145 bpm%n" +
+                "65%%          | 151 bpm%n" +
+                "70%%          | 158 bpm%n" +
+                "75%%          | 165 bpm%n" +
+                "80%%          | 171 bpm%n" +
+                "85%%          | 178 bpm%n" +
+                "90%%          | 185 bpm%n" +
+                "95%%          | 191 bpm%n");
 
-        assertArrayEquals(expected, actual);
+        String actual = calculator.buildHeartRateTable(personData, rangeData);
+
+        assertEquals(expected, actual);
     }
 }
