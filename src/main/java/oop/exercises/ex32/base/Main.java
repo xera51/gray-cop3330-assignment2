@@ -4,16 +4,18 @@
  */
 package oop.exercises.ex32.base;
 
-public class Solution32 {
+public class Main {
+
+    private final GuessingGame game = new GuessingGame();
 
     public static void main(String[] args) {
-        GuessingGame game = new GuessingGame();
+        Main app = new Main();
 
         System.out.println("Let's play Guess the Number!");
 
         do {
             System.out.println();
-            game.playGuessingGame();
-        } while (game.readPlayAgain());
+            app.game.playGuessingGame();
+        } while (app.game.readPlayAgain());
     }
 }

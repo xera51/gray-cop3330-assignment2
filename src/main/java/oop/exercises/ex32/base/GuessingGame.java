@@ -66,7 +66,8 @@ public class GuessingGame {
         return output;
     }
 
-    private int generateNumber(int difficulty) {
+    // Ideally would not be public, but needed something to test
+    public int generateNumber(int difficulty) {
         Random generator = new Random();
         return 1 + generator.nextInt((int) Math.pow(10, difficulty));
     }
