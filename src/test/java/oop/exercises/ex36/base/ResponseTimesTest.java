@@ -4,6 +4,7 @@
  */
 package oop.exercises.ex36.base;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ResponseTimesTest {
 
     @Test
+    @DisplayName("Average")
     void average_is_correctly_calculated() {
         ResponseTimes responseTimes = new ResponseTimes();
         ArrayList<Integer> responseTimeList = new ArrayList<>(Arrays.asList(100, 200, 1000, 300));
@@ -25,6 +27,7 @@ class ResponseTimesTest {
     }
 
     @Test
+    @DisplayName("Min")
     void min_is_correctly_calculated() {
         ResponseTimes responseTimes = new ResponseTimes();
         ArrayList<Integer> responseTimeList = new ArrayList<>(Arrays.asList(100, 200, 1000, 300));
@@ -34,6 +37,7 @@ class ResponseTimesTest {
     }
 
     @Test
+    @DisplayName("Max")
     void max_is_correctly_calculated() {
         ResponseTimes responseTimes = new ResponseTimes();
         ArrayList<Integer> responseTimeList = new ArrayList<>(Arrays.asList(100, 200, 1000, 300));
@@ -43,6 +47,7 @@ class ResponseTimesTest {
     }
 
     @Test
+    @DisplayName("Standard deviation")
     void standard_deviation_is_correctly_calculated() {
         ResponseTimes responseTimes = new ResponseTimes();
         ArrayList<Integer> responseTimeList = new ArrayList<>(Arrays.asList(100, 200, 1000, 300));
