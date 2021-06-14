@@ -1,0 +1,1 @@
+Test for Ex40 is in ex39.base (same class used)
