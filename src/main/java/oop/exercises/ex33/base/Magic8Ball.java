@@ -4,20 +4,25 @@
  */
 package oop.exercises.ex33.base;
 
+import oop.exercises.utility.DataReader;
+
 import java.util.Random;
-import java.util.Scanner;
 
 public class Magic8Ball {
 
     private static final String[] RESPONSES = {"Yes.", "No.", "Maybe.", "Ask again later."};
-    private static final Scanner in = new Scanner(System.in);
+    private static final DataReader in = new DataReader();
 
-    public void shakeBall() {
-        System.out.printf("What is your question?%n> ");
-        in.nextLine();
+    public String shakeBall() {
+        in.readString("What is your question?%n ");
         System.out.println();
 
+        return generateResponse();
+    }
+
+    // Ideally would be private, but needed something to test
+    public String generateResponse() {
         Random generator = new Random();
-        System.out.println(RESPONSES[generator.nextInt(4)]);
+        return RESPONSES[generator.nextInt(RESPONSES.length)];
     }
 }
